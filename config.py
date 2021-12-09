@@ -39,7 +39,8 @@ mod = "mod1"
 terminal = "st"
 
 keys = [
-    #  Key([mod], "`", lazy.group['scratchpad'].dropdown_toggle('term')),
+    Key([mod], "grave", lazy.group['scratchpad'].dropdown_toggle('term')),
+    Key([mod, "shift"], "grave", lazy.group['scratchpad'].dropdown_toggle("qtile shell")),
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -60,7 +61,7 @@ keys = [
     #      desc="Move window focus to other window"),
 
     Key([mod], "f", lazy.window.toggle_fullscreen()),
-    Key([mod], "o", lazy.window.opacity(1.0)),
+    #  Key([mod], "o", lazy.window.opacity(1.0)),
     Key([mod], "space", lazy.window.toggle_floating()),
     Key([mod], 'd', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
@@ -141,7 +142,7 @@ groups = [
         Group("bro5"),
         Group("6"),
         Group("7"),
-        Group("mai8", spawn = "st"),
+        Group("mai8", spawn = "thunderbird"),
         Group("9"),
 ]
 groups.append(
@@ -151,9 +152,7 @@ groups.append(
             DropDown("term", terminal, opacity=0.8),
 
             # define another terminal exclusively for ``qtile shell` at different position
-            DropDown("qtile shell", "st -hold -e 'qtile shell'",
-                 x=0.05, y=0.4, width=0.9, height=0.6, opacity=0.9,
-                 on_focus_lost_hide=True) 
+            DropDown("qtile shell", "st -e \"qtile shell\""),
         ])
 )
 
@@ -168,7 +167,7 @@ for i in range(len(groups) - 1):
         #      desc="Switch to & move focused window to group {}".format(i.name)),
         # Or, use below if you prefer not to switch to that group.
         # # mod1 + shift + letter of group = move focused window to group
-        Key([mod, "shift"], str(i + 1), lazy.window.togroup(group.name)),
+        Key([mod, "shift"], str(i + 1), lazy.window.togroup(group.name, switch_group=True)),
     ])
 
 def init_layout_theme():
