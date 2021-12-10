@@ -40,7 +40,7 @@ terminal = "st"
 
 keys = [
     Key([mod], "grave", lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod, "shift"], "grave", lazy.group['scratchpad'].dropdown_toggle("qtile shell")),
+    Key([mod, "shift"], "grave", lazy.group['scratchpad'].dropdown_toggle('qtile shell')),
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -152,7 +152,7 @@ groups.append(
             DropDown("term", terminal, opacity=0.8),
 
             # define another terminal exclusively for ``qtile shell` at different position
-            DropDown("qtile shell", "st -e \"qtile shell\""),
+            #  DropDown("qtile shell", "st -e \"qtile shell\"", opacity = 0.8),
         ])
 )
 
@@ -207,6 +207,8 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+
+
 screens = [
     Screen(
         bottom=bar.Bar(
@@ -216,7 +218,19 @@ screens = [
                 #  widget.CurrentLayout(padding = 10),
                 widget.CurrentLayoutIcon(),
                 widget.CurrentScreen(),
-                widget.GroupBox(hide_unused = True, highlight_method = 'block'),
+                #  widget.AGroupBox(),
+                widget.GroupBox(
+                    font = 'monaco',
+                    fontsize = 20,
+                    active = '#00FF00', 
+                    inactive = '#FFFFFF',
+                    hide_unused = True,
+                    highlight_method = 'block',
+                    this_current_screen_border = '#7c00ff',
+                    this_screen_border = '#7c00ff',
+                    other_current_screen_border = '#404040',
+                    other_screen_border = '#404040',
+                    ),
                 #  widget.Prompt(),
                 #  widget.WindowName(),
                 widget.TaskList(highlight_method = 'block'),
@@ -255,7 +269,7 @@ screens = [
 
         wallpaper="~/Pictures/Wallpapers/01.jpg",
         wallpaper_mode='fill',
-    ),
+    ), 
     Screen(
         bottom=bar.Bar(
             [
@@ -264,7 +278,19 @@ screens = [
                 #  widget.CurrentLayout(padding = 10),
                 widget.CurrentLayoutIcon(),
                 widget.CurrentScreen(),
-                widget.GroupBox(hide_unused = True, highlight_method = 'block'),
+                #  widget.AGroupBox(),
+                widget.GroupBox(
+                    font = 'monaco',
+                    fontsize = 20,
+                    active = '#00FF00', 
+                    inactive = '#FFFFFF',
+                    hide_unused = True,
+                    highlight_method = 'block',
+                    this_current_screen_border = '#7c00ff',
+                    this_screen_border = '#7c00ff',
+                    other_current_screen_border = '#404040',
+                    other_screen_border = '#404040',
+                    ),
                 #  widget.Prompt(),
                 #  widget.WindowName(),
                 widget.TaskList(highlight_method = 'block'),
@@ -291,7 +317,7 @@ screens = [
                 #  widget.TextBox("default config", name="default"),
                 #  widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 widget.Sep(),
-                widget.PulseVolume(emoji = True),
+                widget.Volume(),
                 widget.Systray(),
                 widget.CheckUpdates(),
                 widget.Clock(format='%Y-%m-%d %a %H:%M'),
@@ -300,9 +326,10 @@ screens = [
             24,
             background='#00000000',
         ),
+
         wallpaper="~/Pictures/Wallpapers/01.jpg",
         wallpaper_mode='fill',
-    ),
+    )
 ]
 
 # Drag floating layouts.
