@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-xmodmap ~/.xmodmap
+# xmodmap ~/.xmodmap
 xrandr --output HDMI-0 --left-of DP-2 --auto
 picom --experimental-backends &
 

@@ -106,8 +106,10 @@ keys = [
     Key([mod], "v", lazy.spawn("pavucontrol")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 2+ unmute")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 2- unmute")),
+    #  Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 2+ unmute")),
+    #  Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 2- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 1 sset Master 2+ unmute")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 1 sset Master 2- unmute")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -137,12 +139,12 @@ keys = [
 groups = [
         Group("ter1"),
         Group("ter2"),
-        Group("ter3", spawn = "st"),
+        Group("ter3"),
         Group("bro4"),
         Group("bro5"),
         Group("6"),
         Group("7"),
-        Group("mai8", spawn = "thunderbird"),
+        Group("mai8"),
         Group("9"),
 ]
 groups.append(
